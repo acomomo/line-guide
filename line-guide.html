@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>彼のLINE取扱説明書</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #FAF8F5;
+    --surface: #FFFFFF;
+    --surface2: #F4F1ED;
+    --text: #1A1410;
+    --text2: #6B6158;
+    --text3: #A89F96;
+    --border: rgba(0,0,0,0.1);
+    --border2: rgba(0,0,0,0.18);
+    --purple-bg: #EEEDFE;
+    --purple-text: #3C3489;
+    --purple-accent: #7F77DD;
+    --green-bg: #E1F5EE;
+    --green-text: #0F6E56;
+    --red-bg: #FCEBEB;
+    --red-text: #A32D2D;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding-bottom: 4rem;
+  }
+
+  .hero {
+    background: var(--text);
+    color: white;
+    padding: 3.5rem 1.5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 80px);
+  }
+  .hero-eyebrow { font-size: 11px; letter-spacing: 0.15em; color: rgba(255,255,255,0.5); margin-bottom: 1rem; text-transform: uppercase; position: relative; }
+  .hero-title { font-family: 'Noto Serif JP', serif; font-size: clamp(1.7rem, 5vw, 2.6rem); font-weight: 600; line-height: 1.35; margin-bottom: 0.75rem; position: relative; }
+  .hero-sub { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.8; position: relative; }
+
+  .wrapper { max-width: 700px; margin: 0 auto; padding: 0 1.25rem; }
+  .section { margin-top: 2.5rem; }
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.75rem; padding-left: 2px; }
+
+  /* Intro */
+  .intro-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    font-size: 13px; color: var(--text2); line-height: 1.85;
+  }
+  .intro-card strong { color: var(--text); font-weight: 700; }
+
+  /* Situation Tabs */
+  .sit-tabs {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1rem;
+  }
+  .sit-tab {
+    padding: 7px 14px; border-radius: 20px; font-size: 12.5px;
+    cursor: pointer; border: 1px solid var(--border2);
+    background: var(--surface); color: var(--text2);
+    transition: all 0.15s; font-weight: 500; line-height: 1.4;
+    text-align: center;
+  }
+  .sit-tab:hover { color: var(--text); }
+  .sit-tab.active { background: var(--text); color: white; border-color: var(--text); }
+
+  /* Situation Card */
+  .sit-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .sit-header {
+    padding: 1.25rem 1.5rem 1.1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .sit-number { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: var(--text3); text-transform: uppercase; margin-bottom: 6px; }
+  .sit-title { font-family: 'Noto Serif JP', serif; font-size: 1.15rem; font-weight: 600; color: var(--text); line-height: 1.4; margin-bottom: 10px; }
+
+  .premise-box {
+    background: var(--surface2);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .premise-label { font-size: 10px; font-weight: 700; color: var(--text3); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; }
+  .premise-text { font-size: 12.5px; color: var(--text2); line-height: 1.8; }
+
+  .sit-body { padding: 1.1rem 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 12px; }
+
+  .ng-block { border-left: 3px solid #E24B4A; padding: 12px 14px; background: var(--red-bg); border-radius: 0 10px 10px 0; }
+  .ng-label { font-size: 10px; font-weight: 700; color: var(--red-text); margin-bottom: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ng-item { font-size: 13px; color: var(--text); line-height: 1.6; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+  .ng-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .ng-main { font-weight: 500; display: flex; gap: 6px; align-items: flex-start; }
+  .ng-x { color: var(--red-text); font-weight: 700; flex-shrink: 0; }
+  .ng-reason { font-size: 12px; color: var(--text2); margin-top: 2px; padding-left: 16px; line-height: 1.6; }
+
+  .ok-block { border-left: 3px solid #1D9E75; padding: 12px 14px; background: var(--green-bg); border-radius: 0 10px 10px 0; }
+  .ok-label { font-size: 10px; font-weight: 700; color: var(--green-text); margin-bottom: 8px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ok-item { font-size: 13px; color: var(--text); line-height: 1.6; padding: 4px 0; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; gap: 6px; align-items: flex-start; }
+  .ok-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .ok-arrow { color: var(--green-text); font-weight: 700; flex-shrink: 0; }
+
+  .message-box {
+    background: var(--purple-bg);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: var(--purple-text);
+    line-height: 1.8;
+    font-weight: 500;
+    border-left: 3px solid var(--purple-accent);
+    border-radius: 0 10px 10px 0;
+  }
+  .message-label { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 6px; opacity: 0.7; }
+
+  .footer { margin-top: 4rem; text-align: center; font-size: 11px; color: var(--text3); padding: 2rem 1.25rem; border-top: 1px solid var(--border); }
+
+  @media (max-width: 480px) {
+    .sit-tab { font-size: 12px; padding: 6px 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrapper">
+    <div class="hero-eyebrow">LINE Communication Guide</div>
+    <h1 class="hero-title">彼のLINE<br>取扱説明書</h1>
+    <p class="hero-sub">5つのシチュエーション別に<br>やっていいこと・いけないことを解説</p>
+  </div>
+</div>
+
+<div class="wrapper">
+
+  <div class="section">
+    <div class="intro-card">
+      女の子にとっては恋愛の必需品であるLINEですが、男性にとっては「気持ちを伝えるツール」というより<strong>「会う約束をするなど、必要な用事を伝えるもの」</strong>です。だから基本的に、連絡と気持ちは一致しません。<br><br>
+      もちろん好きだと連絡したくなるのは女子と同じですが、関係が安定してくると「とくに用事ないから毎日LINEしなくてもいいよね〜」と無意識に思っている（でも彼女のことはちゃんと好き）男性は珍しくないんですよ。<br><br>
+      それを知らないと、連絡に振り回されて不安になって、ついには悪い予想をしてげっそり疲れてしまう。私も過去に何度もやらかしてきたので、みんな仲間です🫶<br><br>
+      そうなると恋が楽しくなくなってしまうから、シチュエーション別に男性心理と正しい対応をまとめました。これを知れば、もう連絡に振り回されなくなります✨
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">シチュエーションを選ぶ</div>
+    <div class="sit-tabs">
+      <div class="sit-tab active" onclick="selectSit(0, this)">① 連絡が<br>減った時</div>
+      <div class="sit-tab" onclick="selectSit(1, this)">② 既読<br>無視された時</div>
+      <div class="sit-tab" onclick="selectSit(2, this)">③ 返信が<br>そっけない時</div>
+      <div class="sit-tab" onclick="selectSit(3, this)">④ 自分から<br>ばかりの時</div>
+      <div class="sit-tab" onclick="selectSit(4, this)">⑤ 未読<br>無視された時</div>
+    </div>
+
+    <div class="sit-card" id="sitCard"></div>
+  </div>
+
+</div>
+
+<div class="footer">
+  © 男性心理と自分軸の視点からお届けするコンテンツ
+</div>
+
+<script>
+const situations = [
+  {
+    number: 'Situation 01',
+    title: '連絡が減った時',
+    premise: '連絡が減ると「冷めた？」って不安になるよね。でも男性の連絡頻度は、気持ちの温度計じゃないんです。仕事・趣味・疲れ・なんとなく……理由はいろいろあるけど、ほとんどの場合、あなたへの気持ちとは切り離されています。「連絡が来ない＝気持ちが減った」は、女性目線の解釈なんですよね。まずそこを外してあげると、かなり楽になります。',
+    ngs: [
+      { main: '「最近どうしたの？」と理由を聞く', reason: '男性は詰問と感じてさらに距離を置きたくなります。聞きたい気持ちはわかるけど、逆効果なんです' },
+      { main: '「忙しいのはわかるけど」と前置きして送る', reason: '責めていないつもりでも、男性にはちゃんと責められている文章として届いています' },
+      { main: '返信が来たら即レスを繰り返す', reason: '「この子、暇なのかな」「追いかけてる側だな」と無意識に思われてしまいます' },
+      { main: '不安を確認するためのLINEを送る', reason: '不安のエネルギーはそのまま伝わります。送れば送るほど状況が悪化しやすいです' },
+    ],
+    oks: [
+      '返信ペースを相手に合わせる（同じ頻度か、少し少なめくらいがちょうどいい）',
+      '次に送るなら「返したくなる内容」にする（日常の面白い話、短い質問ひとつ）',
+      '会えた時間を責めず、思いきり楽しむことに集中する',
+      '自分の予定を充実させて「私も忙しい」状態を自然に作る',
+    ],
+    message: '連絡が減っている時ほど、あなたが自分の時間を楽しんでいるかどうかが大事です。不安から動くか、自分の幸せから動くか。その小さな違いが、関係の行方を変えます。'
+  },
+  {
+    number: 'Situation 02',
+    title: '既読無視された時',
+    premise: '既読をつけて返信しないのは、女性だと「意思表示」のことが多いけど、男性の場合は「後で返そうと思って忘れた」がかなり多いです。悪意ゼロ、理由もゼロ、ただ忘れた。それだけのことが珍しくないんですよ（脱力するよね笑）。最初から「無視された」と決めつけないことが、自分を守るためにも大切です。',
+    ngs: [
+      { main: '追加でLINEを送る', reason: '返信ハードルがどんどん上がって、さらに返しにくくなります。重ねれば重ねるほど逆効果' },
+      { main: '「見た？」「忙しい？」と確認する', reason: 'プレッシャーを感じた男性は、さらに返信を先延ばしにします' },
+      { main: '電話をかける', reason: '追い詰められた感覚を与えてしまいます。出なかった場合も気まずさが増すだけ' },
+      { main: '既読になった時間帯から行動を推測する', reason: 'その推測はほぼ当たらず、不安が増えるだけなのでやめてあげて🫶' },
+    ],
+    oks: [
+      '24〜48時間はそのまま待つ（これが一番正解）',
+      '待っている間は、自分が楽しめることを意識的にやる',
+      '48時間後も返信がなければ、前の内容と全く関係ない軽い話題を一通だけ送る',
+      '返信が来たら、無視されたことには触れずに普通に返す',
+    ],
+    message: '既読無視された瞬間に動くのが、一番もったいない行動です。待てる余裕がある女性は、それだけで魅力的に映ります。「待つ」は我慢じゃなくて、戦略です✨'
+  },
+  {
+    number: 'Situation 03',
+    title: '返信がそっけない時（短文・スタンプのみ）',
+    premise: '「うん」「そうだね」「了解」——これを見てがっかりした経験、あると思います。でも男性は元々、文章でのコミュニケーションに女性ほどのエネルギーを使いません。短い返信は、気持ちが薄れたサインではなく、男性のデフォルトの返し方なんですよね。返信の長さと気持ちの深さは、男性の場合ほぼ比例しません。',
+    ngs: [
+      { main: '「もう少しちゃんと返信してほしい」と伝える', reason: '男性は責められたと感じ、さらに返信が億劫になります' },
+      { main: 'こちらも同じようにそっけなくする（当てつけ）', reason: '男性はほぼ気づきません。残念ながら効果がないです' },
+      { main: '返信の短さから気持ちを推測して落ち込む', reason: 'その推測に根拠はないので、一人で傷ついてしまうだけです' },
+      { main: '長文を送り返す', reason: '返信の重さのギャップが広がって、さらに返しにくくなります' },
+    ],
+    oks: [
+      'こちらも短く返す（相手のペースに合わせるのが正解）',
+      'LINEより「会った時の会話」を充実させることに集中する',
+      '返信を引き出したい時は、答えやすいクローズドな質問をひとつだけ入れる',
+      '文章より、会えた時間に全力を注ぐ',
+    ],
+    message: '返信の長さで愛情を測ろうとすると、ずっと不安になります。彼なりの愛情表現の形があるだけ。そう思えると、同じ「うん」がぜんぜん違って見えてきますよ🌿'
+  },
+  {
+    number: 'Situation 04',
+    title: 'こちらからばかり連絡している気がする時',
+    premise: '男性は「連絡しなくても関係は続いている」と感じやすい生き物です。女性が連絡で関係を確認しようとするのに対して、男性は会った時間や一緒にいる感覚で関係を確認します。だから連絡の発信数が違っても、それは気持ちの差ではなく、コミュニケーションのスタイルの差であることが多いんです。',
+    ngs: [
+      { main: '「いつも私からばかり」と伝える', reason: '義務感から連絡するようになり、むしろ気持ちが離れやすくなります' },
+      { main: '試しに連絡をやめて反応を見る（当てつけ目的で）', reason: '当てつけのエネルギーは伝わります。ただし連絡を減らすこと自体は有効です' },
+      { main: '連絡の回数を数えて比較する', reason: 'その行為が関係を窮屈にしてしまいます' },
+      { main: 'ひとつひとつの返信に深い意味を求める', reason: '男性の返信に込められた意味は、思っているより少ないです笑' },
+    ],
+    oks: [
+      '意識的に連絡頻度を落として、自然な流れを作る',
+      '連絡よりも「会った時間の質」を上げることに集中する',
+      '送る前に「これは不安を埋めるために送っているか？」と一度確認する',
+      '彼から連絡が来た時に、すぐ返しすぎない（少し余白を作る）',
+    ],
+    message: '連絡の数を均等にしようとするより、会えた時間に全力を注ぐほうが関係はずっと良くなります。\n\n具体的には——デートで可愛い笑顔を見せること、彼の前でイキイキと楽しそうに話すこと、彼の話を前のめりで聞くこと（「それで？もっと聞きたい！」という姿勢）、ネガティブな話は短時間で済ませてすぐに切り替えること、会えた瞬間に満面の笑みで嬉しさを表現すること、でも帰り際は粘りすぎずあっさり帰ること。\n\nこれだけで、毎日LINEするより何倍も「また会いたい」と思ってもらえます。'
+  },
+  {
+    number: 'Situation 05',
+    title: '未読無視された時',
+    premise: '未読無視は既読無視より深刻に見えるけど、男性の場合「通知を見て、後で読もうと思っていた」「返信の内容を考えているうちに時間が経った」というケースがとても多いです。意図的に無視しているとは限りません。\n\nただ正直に言うと、未読時間が長いほど注意は必要です。でも仕事がうまくいっていない時や精神的に余裕がない時、あなたへの気持ちとはまったく別のところで未読のままにしてしまう男性も少なくありません。気持ちとは関係なくても「今は無理」というサインであることには変わりないので、何もしないのが一番安全です。未読が積み重なるほど彼の返信ハードルが上がるということも覚えておいてください。',
+    ngs: [
+      { main: '追加でLINEを重ねる', reason: '未読が積み重なるほど返信ハードルが上がり、ますます返しにくくなります' },
+      { main: '電話・他のSNSで連絡する', reason: '追い詰めている印象を与えて、逃げたくなる心理を強めます' },
+      { main: '「見てる？」「忙しい？」と確認する', reason: '返信を強要しているメッセージとして届いてしまいます' },
+      { main: 'オンライン状態を確認して一喜一憂する', reason: 'その行動自体があなたを消耗させます。見るのをやめて🫶' },
+    ],
+    oks: [
+      '48時間は何もしない（これが最善のアクション）',
+      '待っている間は、連絡以外で自分が楽しめることをやる',
+      '48時間後も未読なら、前のLINEとは全く関係ない軽い一言を送る',
+      'それでも未読なら、いったん手放して既読になるまで放置する（既読になってもすぐには何もせず、彼から連絡が来るまで待つのが最善）',
+    ],
+    message: '何もしないことが、今できる最大のアクションです。不安に負けて送った一通が、関係を壊すことがあります。\n\nそして、もしどれだけ待っても返信が来なくても——それはあなたの価値とはまったく関係ありません。その人からご縁がなかっただけで、あなたに愛される価値があることは変わらない。ご縁のある人だったら一時的に離れても最後にはちゃんと繋がれるし、そうじゃなければ今のあなたには必要なかった人だっただけです。自信だけはなくさないでほしいです。これだけは約束ね🫶'
+  }
+];
+
+function selectSit(idx, el) {
+  document.querySelectorAll('.sit-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderSit(idx);
+}
+
+function renderSit(idx) {
+  const s = situations[idx];
+  document.getElementById('sitCard').innerHTML = `
+    <div class="sit-header">
+      <div class="sit-number">${s.number}</div>
+      <div class="sit-title">${s.title}</div>
+      <div class="premise-box">
+        <div class="premise-label">まず知っておいてほしいこと</div>
+        <div class="premise-text">${s.premise.split('\n').filter(l => l.trim()).map(l => `<p style="margin-bottom:0.5em;">${l}</p>`).join('')}</div>
+      </div>
+    </div>
+    <div class="sit-body">
+      <div class="ng-block">
+        <div class="ng-label">NG ── やってはいけないこと</div>
+        ${s.ngs.map(n => `
+          <div class="ng-item">
+            <div class="ng-main"><span class="ng-x">×</span>${n.main}</div>
+            <div class="ng-reason">→ ${n.reason}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="ok-block">
+        <div class="ok-label">OK ── 有効なこと</div>
+        ${s.oks.map(o => `
+          <div class="ok-item"><span class="ok-arrow">→</span>${o}</div>
+        `).join('')}
+      </div>
+      <div class="message-box">
+        <div class="message-label">覚えておいてほしいこと</div>
+        ${s.message.split('\n').filter(l => l.trim()).map(l => `<p style="margin-bottom:0.5em;line-height:1.85;">${l}</p>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+renderSit(0);
+</script>
+</body>
+</html>
